@@ -106,4 +106,4 @@ class SlackAuthCallbackView(APIView):
         messages.add_message(
             request, messages.SUCCESS, "Connected to Slack successfully.!"
         )
-        return redirect(reverse("core:workflow"))
+        return redirect(reverse("core:home-view"))
