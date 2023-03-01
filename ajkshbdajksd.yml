@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  django_server:
+    build: .
+    working_dir: /usr/src/app
+    command: >
+      sh -c "python manage.py migrate &&
+            gunicorn src.wsgi:application --bind 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    container_name: django_server

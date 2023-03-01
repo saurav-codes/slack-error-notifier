@@ -9,3 +9,4 @@ redis==4.3.4
 requests==2.28.1
 django-allauth==0.51.0
 django-auth-style==0.8.1
+gunicorn
