@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-w9fq#xs32xg$ni2)jpu@q5z$k8v8)z(h$jhwa1pb2!ps50b2be
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # TODO: Change to False in production
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["slack-error-notifier-production.up.railway.app"]
 
 
 # Application definition
