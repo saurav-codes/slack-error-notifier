@@ -86,7 +86,7 @@ class SlackAuthCallbackView(APIView):
             "client_id": settings.SLACK_CLIENT_ID,
             "client_secret": settings.SLACK_CLIENT_SECRET,
             "code": code,
-            "redirect_uri": settings.BASE_URL + reverse("core:slack-auth-callback"),
+            "redirect_uri": "https://slack-error-notifier-production.up.railway.app/slack-auth-callback/",
         }
         response = requests.post(url, data=data)
         response_data = response.json()
