@@ -25,7 +25,10 @@ SECRET_KEY = "django-insecure-w9fq#xs32xg$ni2)jpu@q5z$k8v8)z(h$jhwa1pb2!ps50b2be
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # TODO: Change to False in production
 
-ALLOWED_HOSTS = ["slack-error-notifier-production.up.railway.app"]
+ALLOWED_HOSTS = [
+    "slack-error-notifier-production.up.railway.app",
+    "localhost",
+]
 
 
 # Application definition
@@ -126,9 +129,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
-    ],
+    "DEFAULT_PERMISSION_CLASSES": [],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
 }
@@ -162,8 +163,9 @@ LOGGING = {
 }
 
 BASE_URL = "http://localhost:8000"
-SLACK_CLIENT_ID = "someclientid"
-SLACK_CLIENT_SECRET = "somesecret"
+# secrets needs to be moved to .env file
+SLACK_CLIENT_ID = "4465703851780.4880416970084"
+SLACK_CLIENT_SECRET = "a2a0cfe772f58f5e56c45c346710e33d"
 SLACK_AUTH_URL = "https://slack.com/oauth/v2/authorize"
 SLACK_SCOPES = "incoming-webhook"
 SLACK_USER_SCOPES = ""
