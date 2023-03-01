@@ -31,14 +31,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "baton",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "apps.core",
+    "django.contrib.sites",
     "rest_framework",
+    "apps.core",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
 ]
 
 MIDDLEWARE = [
@@ -164,4 +169,56 @@ LOGGING = {
             "propagate": False,  # Prevents propagation to root logger
         },
     },
+}
+
+BASE_URL = "http://localhost:8000"
+SLACK_CLIENT_ID = "someclientid"
+SLACK_CLIENT_SECRET = "somesecret"
+
+
+# Custom User
+AUTH_USER_MODEL = "core.CustomUser"
+
+
+# Allauth settings
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+ACCOUNT_USERNAME_REQUIRED = False
+SOCIALACCOUNT_STORE_TOKENS = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+SOCIALACCOUNT_LOGOUT_ON_GET = False
+SOCIALACCOUNT_AUTO_SIGNUP = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http" if DEBUG else "https"
+
+# authentication backends used by allauth
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+
+
+# Django Baton
+BATON = {
+    "SITE_HEADER": "Automate IO",
+    "SITE_TITLE": "Automate IO",
+    "INDEX_TITLE": "Website administration",
+    "SUPPORT_HREF": "https://github.com/otto-torino/django-baton/issues",
+    "COPYRIGHT": 'copyright © 2022 <a href="https://www.automate.io">Automate IO</a>',
+    "CONFIRM_UNSAVED_CHANGES": True,
+    "SHOW_MULTIPART_UPLOADING": True,
+    "ENABLE_IMAGES_PREVIEW": True,
+    "CHANGELIST_FILTERS_IN_MODAL": True,
+    "CHANGELIST_FILTERS_ALWAYS_OPEN": False,
+    "CHANGELIST_FILTERS_FORM": True,
+    "MENU_ALWAYS_COLLAPSED": False,
+    "MENU_TITLE": "Menu",
+    "MESSAGES_TOASTS": False,
+    "GRAVATAR_DEFAULT_IMG": "retro",
+    "LOGIN_SPLASH": "/static/core/img/login-splash.png",
 }

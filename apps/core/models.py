@@ -1,3 +1,6 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# Create your models here.
+
+class CustomUser(AbstractUser):
+    slack_webhook_url = models.URLField(blank=True, null=True, default=None)
