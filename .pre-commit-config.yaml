@@ -1,0 +1,23 @@
+# This file contains pre commit hooks for auto formatting when code goes on gitHub
+
+repos:
+  - repo: https://github.com/psf/black
+    rev: 22.10.0
+    hooks:
+      - id: black
+        language_version: python3.10
+        exclude: ^.*\b(migrations)\b.*$  # exclude migrations folder
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        args: ["--profile", "black", "--filter-files"]
+        exclude: ^.*\b(migrations)\b.*$  # exclude migrations folder
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: check-yaml
+      - id: trailing-whitespace
+      - id: debug-statements
