@@ -21,16 +21,13 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
-            if self.request.user.slack_webhook_url:
-                context["slack_auth_url"] = None
-            else:
-                client_id = settings.SLACK_CLIENT_ID
-                scopes = settings.SLACK_SCOPES
-                user_scopes = settings.SLACK_USER_SCOPES
-                base_url = settings.SLACK_AUTH_URL
-                context[
-                    "slack_auth_url"
-                ] = f"{base_url}?client_id={client_id}&scope={scopes}&user_scope={user_scopes}"
+            client_id = settings.SLACK_CLIENT_ID
+            scopes = settings.SLACK_SCOPES
+            user_scopes = settings.SLACK_USER_SCOPES
+            base_url = settings.SLACK_AUTH_URL
+            context[
+                "slack_auth_url"
+            ] = f"{base_url}?client_id={client_id}&scope={scopes}&user_scope={user_scopes}"
         return context
 
 
@@ -107,3 +104,27 @@ class SlackAuthCallbackView(APIView):
             request, messages.SUCCESS, "Connected to Slack successfully.!"
         )
         return redirect(reverse("core:home-view"))
+
+
+# NOTE: this is for testing purpose only
+from rest_framework import serializers
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = (
+            "password",
+            "is_superuser",
+            "is_staff",
+            "is_active",
+            "groups",
+            "user_permissions",
+        )
+
+
+class UserView(APIView):
+    def get(self, request, *args, **kwargs):
+        user = User.objects.all()
+        serializer = UserSerializer(user, many=True)
+        return Response(serializer.data, status=200)
