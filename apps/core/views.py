@@ -14,6 +14,19 @@ logger = logging.getLogger(__name__)
 class HomeView(TemplateView):
     template_name = "core/home.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if not self.request.user.slack_webhook_url:
+            client_id = settings.SLACK_CLIENT_ID
+            scopes = settings.SLACK_SCOPES
+            user_scopes = settings.SLACK_USER_SCOPES
+            base_url = settings.SLACK_AUTH_URL
+            context[
+                "slack_auth_url"
+            ] = f"{base_url}?client_id={client_id}&scope={scopes}&user_scope={user_scopes}"
+
+        return context
+
 
 class SlackAuthCallbackView(APIView):
     """

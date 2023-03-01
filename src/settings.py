@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "rest_framework",
     "apps.core",
+    "auth_style",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -91,20 +92,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
+AUTH_PASSWORD_VALIDATORS = []  # as of now, no password validators
 
 
 # Internationalization
@@ -174,14 +162,16 @@ LOGGING = {
 BASE_URL = "http://localhost:8000"
 SLACK_CLIENT_ID = "someclientid"
 SLACK_CLIENT_SECRET = "somesecret"
-
+SLACK_AUTH_URL = "https://slack.com/oauth/v2/authorize"
+SLACK_SCOPES = "incoming-webhook"
+SLACK_USER_SCOPES = ""
 
 # Custom User
 AUTH_USER_MODEL = "core.CustomUser"
 
 
 # Allauth settings
-ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
 ACCOUNT_EMAIL_REQUIRED = True
