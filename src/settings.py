@@ -164,8 +164,8 @@ LOGGING = {
 
 BASE_URL = "http://localhost:8000"
 # secrets needs to be moved to .env file
-SLACK_CLIENT_ID = "4465703851780.4880416970084"
-SLACK_CLIENT_SECRET = "5c8260a4e8175918ef4188ed24a777f1"
+SLACK_CLIENT_ID = ""
+SLACK_CLIENT_SECRET = ""
 SLACK_AUTH_URL = "https://slack.com/oauth/v2/authorize"
 SLACK_SCOPES = "incoming-webhook"
 SLACK_USER_SCOPES = ""
